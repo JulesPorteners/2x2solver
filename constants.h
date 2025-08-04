@@ -1,0 +1,124 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
+#define ORANGE 0 
+#define RED 1 
+#define YELLOW 2 
+#define WHITE 3 
+#define BLUE 4 
+#define GREEN 5 
+
+#define STATES 3674160
+#define HASH_TABLE_SIZE (2 * STATES)
+#define GOD 11
+#define EXTRA_MOVES 3 //4 
+#define MAX_MOVES (GOD + EXTRA_MOVES)
+#define MOVES 9
+#define ANGLES 24
+#define INFINITY 374269
+#define SOLUTIONS 10
+
+//moves = 9?
+#define MOVE_R_NORMAL 0
+#define MOVE_R_INVERSE 1
+#define MOVE_R_DOUBLE 2
+#define MOVE_U_NORMAL 3
+#define MOVE_U_INVERSE 4
+#define MOVE_U_DOUBLE 5
+#define MOVE_F_NORMAL 6
+#define MOVE_F_INVERSE 7
+#define MOVE_F_DOUBLE 8
+
+#define ROTATION_X_NORMAL 0
+#define ROTATION_X_INVERSE 1
+#define ROTATION_X_DOUBLE 2
+#define ROTATION_Y_NORMAL 3
+#define ROTATION_Y_INVERSE 4
+#define ROTATION_Y_DOUBLE 5
+#define ROTATION_Z_NORMAL 6
+#define ROTATION_Z_INVERSE 7
+#define ROTATION_Z_DOUBLE 8
+
+#define GOOD_REGRIP 25
+#define BAD_REGRIP 75
+
+#define QUARTER_WRIST 100
+#define HALF_WRIST 150
+
+/*
+#define NONE_NONE
+#define NONE_PINCH
+#define NONE_INDEX
+#define NONE_MIDDLE
+#define NONE_DOUBLE
+#define NONE_PUSH
+#define PINCH_NONE
+#define PINCH_PINCH
+#define PINCH_INDEX
+#define PINCH_MIDDLE
+#define PINCH_DOUBLE
+#define PINCH_PUSH
+#define INDEX_NONE
+#define INDEX_PINCH
+#define INDEX_INDEX
+#define INDEX_MIDDLE
+#define INDEX_DOUBLE
+#define INDEX_PUSH
+#define MIDDLE_NONE
+#define MIDDLE_PINCH
+#define MIDDLE_INDEX
+#define MIDDLE_MIDDLE
+#define MIDDLE_DOUBLE
+#define MIDDLE_PUSH
+#define DOUBLE_NONE
+#define DOUBLE_PINCH
+#define DOUBLE_INDEX
+#define DOUBLE_MIDDLE
+#define DOUBLE_DOUBLE
+#define DOUBLE_PUSH
+#define PUSH_NONE
+#define PUSH_PINCH
+#define PUSH_INDEX
+#define PUSH_MIDDLE
+#define PUSH_DOUBLE
+#define PUSH_PUSH
+
+*/
+//#define NONE_NONE_NONE
+#define NONE_NONE_PINCH 125
+#define NONE_NONE_INDEX 125
+//#define NONE_NONE_MIDDLE 
+#define NONE_NONE_DOUBLE 175
+#define NONE_NONE_PUSH 175
+//#define PINCH_NONE_NONE
+#define PINCH_NONE_PINCH 175
+#define PINCH_NONE_INDEX 175
+#define PINCH_NONE_MIDDLE 150
+#define PINCH_NONE_DOUBLE 225
+#define PINCH_NONE_PUSH 175
+//#define INDEX_NONE_NONE
+#define INDEX_NONE_PINCH 175
+#define INDEX_NONE_INDEX 175
+#define INDEX_NONE_MIDDLE 150
+#define INDEX_NONE_DOUBLE 225
+#define INDEX_NONE_PUSH 150
+//#define MIDDLE_NONE_NONE
+#define MIDDLE_NONE_PINCH 250
+#define MIDDLE_NONE_INDEX 250
+//#define MIDDLE_NONE_MIDDLE
+#define MIDDLE_NONE_DOUBLE 300
+#define MIDDLE_NONE_PUSH 200
+//#define DOUBLE_NONE_NONE 
+#define DOUBLE_NONE_PINCH 250
+#define DOUBLE_NONE_INDEX 250
+//#define DOUBLE_NONE_MIDDLE
+#define DOUBLE_NONE_DOUBLE 300
+#define DOUBLE_NONE_PUSH 200
+//#define PUSH_NONE_NONE
+#define PUSH_NONE_PINCH 225
+#define PUSH_NONE_INDEX 150
+//#define PUSH_NONE_MIDDLE
+#define PUSH_NONE_DOUBLE 200
+#define PUSH_NONE_PUSH 225
+
+#endif
