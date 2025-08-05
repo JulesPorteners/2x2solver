@@ -138,19 +138,7 @@ int main(){
             solution_value = INFINITY;
             solution_size = 0;
             rotations_size = 0;
-/*
-            init_layers2();
-            solve(c);
-            cout << "NEW      : ";
-            output_solution();
-            solution_value = INFINITY;
 
-            init_layers3();
-            solve(c);
-            cout << "NO REGRIP: ";
-            output_solution();
-            solution_value = INFINITY;
-*/
         }
         else{
             cout << "invalid move\n";

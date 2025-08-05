@@ -16,7 +16,6 @@
 #define MOVES 9
 #define ANGLES 24
 #define INFINITY 374269
-#define SOLUTIONS 10
 
 //moves = 9?
 #define MOVE_R_NORMAL 0
@@ -39,6 +38,29 @@
 #define ROTATION_Z_INVERSE 7
 #define ROTATION_Z_DOUBLE 8
 
+#define GRIPS 3
+#define GRIP_THUMB_DOWN 0
+#define GRIP_THUMB_FRONT 1
+#define GRIP_THUMB_UP 2
+
+#define TRICKS 11
+#define TRICK_NONE 0
+#define TRICK_LEFT_PINCH 1
+#define TRICK_LEFT_INDEX 2
+#define TRICK_LEFT_MIDDLE 3
+#define TRICK_LEFT_DOUBLE 4
+#define TRICK_LEFT_PUSH 5
+#define TRICK_RIGHT_PINCH 6
+#define TRICK_RIGHT_INDEX 7
+#define TRICK_RIGHT_MIDDLE 8
+#define TRICK_RIGHT_DOUBLE 9
+#define TRICK_RIGHT_PUSH 10
+
+#define COORDINATES (GRIPS * TRICKS * TRICKS)
+
+
+#define UNDEFINED_UF 500
+
 #define GOOD_REGRIP 25
 #define BAD_REGRIP 75
 
@@ -55,7 +77,9 @@
 #define PINCH_NONE
 #define PINCH_PINCH
 #define PINCH_INDEX
-#define PINCH_MIDDLE
+*/
+#define PINCH_MIDDLE 175
+/*
 #define PINCH_DOUBLE
 #define PINCH_PUSH
 #define INDEX_NONE
@@ -82,8 +106,8 @@
 #define PUSH_MIDDLE
 #define PUSH_DOUBLE
 #define PUSH_PUSH
-
 */
+
 //#define NONE_NONE_NONE
 #define NONE_NONE_PINCH 125
 #define NONE_NONE_INDEX 125
