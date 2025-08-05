@@ -269,11 +269,7 @@ void init_layers1(){
 }
 
 u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
-    for (u64 i = 0; i + 2 < moves_size; i++){
-        if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
-            return INFINITY;
-        }
-    }
+    
 
     u64 distances_even[COORDINATES]; 
     u64 distances_odd[COORDINATES]; 
@@ -367,6 +363,12 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
                 result = distances_odd[i];
             }
         }   
+    }
+
+    for (u64 i = 0; i + 2 < moves_size; i++){
+        if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
+            result += 500;
+        }
     }
     return result;
 }
