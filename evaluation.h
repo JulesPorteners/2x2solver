@@ -307,6 +307,7 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
     for (u64 i = 0; i < COORDINATES; i++){
         distances_even[i] = INFINITY;
     }
+    distances_even[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = 0;
     
     for (u64 m = 0; m < moves_size; m++){
         if (m % 2 == 0){
@@ -355,11 +356,13 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
                         break;
                 }                
             }
-            for (u64 i = 0; i < COORDINATES; i++){
-                if (distances_even[i] != INFINITY){
-                    for (u64 j = 0; j < layer_move_size[moves[m]][i]; j++){
-                        if (distances_even[i] + layer_move[moves[m]][i][j].cost < distances_odd[layer_move[moves[m]][i][j].to]){
-                            distances_odd[layer_move[moves[m]][i][j].to] = distances_even[i] + layer_move[moves[m]][i][j].cost;
+            else{
+                for (u64 i = 0; i < COORDINATES; i++){
+                    if (distances_even[i] != INFINITY){
+                        for (u64 j = 0; j < layer_move_size[moves[m]][i]; j++){
+                            if (distances_even[i] + layer_move[moves[m]][i][j].cost < distances_odd[layer_move[moves[m]][i][j].to]){
+                                distances_odd[layer_move[moves[m]][i][j].to] = distances_even[i] + layer_move[moves[m]][i][j].cost;
+                            }
                         }
                     }
                 }
