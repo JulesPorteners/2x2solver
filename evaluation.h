@@ -59,16 +59,42 @@ void add_edge(u64 move, u64 i, u64 grip, u64 trick1, u64 trick2, u64 cost){
 u64 get_cost(u64 history1, u64 history2, u64 next){
     u64 result;
 
-    if (history2 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_MIDDLE){
-        result = PINCH_MIDDLE;
+    
+
+    if (history2 != TRICK_NONE){
+        bool h2l = history2 == TRICK_LEFT_PINCH || history2 == TRICK_LEFT_INDEX || history2 == TRICK_LEFT_MIDDLE || history2 == TRICK_LEFT_DOUBLE || history2 == TRICK_LEFT_PUSH;
+        bool h2r = history2 == TRICK_RIGHT_PINCH || history2 == TRICK_RIGHT_INDEX || history2 == TRICK_RIGHT_MIDDLE || history2 == TRICK_RIGHT_DOUBLE || history2 == TRICK_RIGHT_PUSH;
+        bool nl = next == TRICK_LEFT_PINCH || next == TRICK_LEFT_INDEX || next == TRICK_LEFT_MIDDLE || next == TRICK_LEFT_DOUBLE || next == TRICK_LEFT_PUSH;
+        bool nr = next == TRICK_RIGHT_PINCH || next == TRICK_RIGHT_INDEX || next == TRICK_RIGHT_MIDDLE || next == TRICK_RIGHT_DOUBLE || next == TRICK_RIGHT_PUSH;
+        if (history2 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_MIDDLE){
+            result = PINCH_MIDDLE;
+        }
+        else if (history2 == TRICK_LEFT_PINCH && next == TRICK_LEFT_MIDDLE){
+            result = PINCH_MIDDLE;
+        }
+        else if ((h2l && nr) || (h2r && nl)){
+            if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH + 50; }
+            else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX + 50; }
+            else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE + 50; }
+            else if (next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH + 50; }  
+
+            else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH + 50; }
+            else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX + 50; }
+            else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE + 50; }
+            else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH + 50; } 
+
+            else{
+                result = INFINITY;
+            }
+        }
+
+
+        else{ 
+            result = INFINITY; //UNDEFINED_UF;
+        } 
     }
-    else if (history2 == TRICK_LEFT_PINCH && next == TRICK_LEFT_MIDDLE){
-        result = PINCH_MIDDLE;
-    }
-    else if (history2 != TRICK_NONE){
-        result = UNDEFINED_UF;
-    } 
-    else{
+    
+    else if (history2 == TRICK_NONE){
         if (history1 == TRICK_NONE && next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH; }
         else if (history1 == TRICK_NONE && next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX; }
         else if (history1 == TRICK_NONE && next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE; }
@@ -132,11 +158,12 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
         else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX; }
         else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE; }
         else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH; } 
+
         else{
-            result = 0;
-            printf("ERROR: illegal fingertrick \n");
+            result = INFINITY;
         }
     }
+
     return result;
 }
 
@@ -269,7 +296,11 @@ void init_layers1(){
 }
 
 u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
-    
+    for (u64 i = 0; i + 2 < moves_size; i++){
+        if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
+            return INFINITY;
+        }
+    }
 
     u64 distances_even[COORDINATES]; 
     u64 distances_odd[COORDINATES]; 
@@ -365,11 +396,12 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
         }   
     }
 
+    /*
     for (u64 i = 0; i + 2 < moves_size; i++){
         if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
             result += 500;
         }
-    }
+    }*/
     return result;
 }
 

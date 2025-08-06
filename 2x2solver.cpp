@@ -62,6 +62,10 @@ bool get_moves(u64* cc, string* line){
 }
 
 void output_solution(){ 
+    if (solution_value == INFINITY){
+        cout << "ERROR: no good solution found\n";
+        return;
+    }
     string output = "";
     for (u64 i = 0; i < rotations_size; i++){
         switch (rotations[i]){
@@ -135,6 +139,7 @@ int main(){
             solve(c);
             //cout << "OLD      : ";
             output_solution();
+            //cout << solution_value << "\n";
             solution_value = INFINITY;
             solution_size = 0;
             rotations_size = 0;
