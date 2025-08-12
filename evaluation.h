@@ -167,7 +167,7 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
     return result;
 }
 
-void init_layers1(){
+void init_layers(){
     for (u64 m = 0; m < MOVES; m++){
         for (u64 i = 0; i < COORDINATES; i++){
             struct coordinate u = number_to_coordinate(i);

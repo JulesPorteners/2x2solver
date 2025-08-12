@@ -117,12 +117,13 @@ u64 get_example(){
 int main(){
     cout << "Loading..\n";
     tables_generator();
-    init_layers1();
+    init_layers();
     cout << "\nEnter a 2x2 scramble using the following moves:\nR R' R2 U U' U2 F F' F2\n\n";
 
     cout << "Example:\n";
     cout << "> R' U2 F U' F R' F U' R2 U' R'\n";
     u64 example = get_example();
+    
     solve(example);
     output_solution();
     solution_value = INFINITY;
@@ -135,11 +136,8 @@ int main(){
         u64 c;
         bool valid = get_moves(&c, &line);
         if (valid){
-            //init_layers1();
             solve(c);
-            //cout << "OLD      : ";
             output_solution();
-            //cout << solution_value << "\n";
             solution_value = INFINITY;
             solution_size = 0;
             rotations_size = 0;
