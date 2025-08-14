@@ -73,15 +73,15 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
             result = PINCH_MIDDLE;
         }
         else if ((h2l && nr) || (h2r && nl)){
-            if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH + 50; }
-            else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX + 50; }
-            else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE + 50; }
-            else if (next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH + 50; }  
+            if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH + 25; }
+            else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX + 25; }
+            else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
+            else if (next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH + 25; }  
 
-            else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH + 50; }
-            else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX + 50; }
-            else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE + 50; }
-            else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH + 50; } 
+            else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH + 25; }
+            else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX + 25; }
+            else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
+            else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH + 25; } 
 
             else{
                 result = INFINITY;
@@ -317,42 +317,42 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
             if (m == 0){
                 switch (moves[0]){
                     case MOVE_R_NORMAL: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + BAD_REGRIP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + BAD_REGRIP + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + PICKUP;
                         break;
                     case MOVE_R_INVERSE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + BAD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + BAD_REGRIP + PICKUP;
                         break;
                     case MOVE_R_DOUBLE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE))] = HALF_WRIST + BAD_REGRIP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE))] = HALF_WRIST + BAD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE))] = HALF_WRIST + BAD_REGRIP + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE))] = HALF_WRIST + BAD_REGRIP + PICKUP;
                         break;
                     case MOVE_U_NORMAL: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_INDEX))] = NONE_NONE_INDEX;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_RIGHT_PINCH))] = NONE_NONE_PINCH + BAD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_INDEX))] = NONE_NONE_INDEX + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_RIGHT_PINCH))] = NONE_NONE_PINCH + BAD_REGRIP + PICKUP;
                         break;
                     case MOVE_U_INVERSE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + GOOD_REGRIP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + GOOD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + GOOD_REGRIP + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + GOOD_REGRIP + PICKUP;
                         break;
                     case MOVE_U_DOUBLE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + GOOD_REGRIP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_DOUBLE))] = NONE_NONE_DOUBLE;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + GOOD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_DOUBLE))] = NONE_NONE_DOUBLE + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP;
                         break;
                     case MOVE_F_NORMAL: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX))] = NONE_NONE_INDEX + BAD_REGRIP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH))] = NONE_NONE_PINCH;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX))] = 25 + NONE_NONE_INDEX + BAD_REGRIP + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH))] = 25 + NONE_NONE_PINCH + PICKUP;
                         break;
                     case MOVE_F_INVERSE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH))] = NONE_NONE_PINCH + GOOD_REGRIP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH))] = NONE_NONE_PINCH + GOOD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH))] = 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH))] = 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP;
                         break;
                     case MOVE_F_DOUBLE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE))] = NONE_NONE_DOUBLE + BAD_REGRIP;
+                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE))] = 25 + NONE_NONE_DOUBLE + BAD_REGRIP + PICKUP;
                         break;
                 }                
             }

@@ -101,4 +101,42 @@ void tables_generator(){
     }
 }
 
+u64 cube_to_inverse(u64 c){
+    struct cube normal = cubes[c];
+    struct cube inverse;
+    struct cube solved;
+    cube_constructor(&solved);
+    for (u64 x = 0; x < 2; x++){
+        for (u64 y = 0; y < 2; y++){
+            for (u64 z = 0; z < 2; z++){
+                u64 xd;
+                u64 yd;
+                u64 zd;
+                u64 d0;
+                u64 d1;
+                u64 d2;
+                for (u64 d = 0; d < 3; d++){
+                    switch (normal.stickers[x][y][z][d]){
+                        case ORANGE: xd = 0; break;
+                        case RED: xd = 1; break;
+                        case YELLOW: yd = 0; break;
+                        case WHITE: yd = 1; break;
+                        case BLUE: zd = 0; break;
+                        case GREEN: zd = 1; break;
+                    }
+                    switch (d){
+                        case 0: d0 = normal.stickers[x][y][z][d] / 2; break;
+                        case 1: d1 = normal.stickers[x][y][z][d] / 2; break;
+                        case 2: d2 = normal.stickers[x][y][z][d] / 2; break;
+                    } 
+                }
+                inverse.stickers[xd][yd][zd][d0] = solved.stickers[x][y][z][0];
+                inverse.stickers[xd][yd][zd][d1] = solved.stickers[x][y][z][1];
+                inverse.stickers[xd][yd][zd][d2] = solved.stickers[x][y][z][2];
+            }
+        }
+    }    
+    return hash_table_get(&inverse)->index;
+}
+
 #endif

@@ -137,6 +137,29 @@ int main(){
         bool valid = get_moves(&c, &line);
         if (valid){
             solve(c);
+/*
+            u64 cc = c;
+            for (u64 pre = 0; pre < 4; pre++){
+                cc = cube_to_inverse(cc);
+                switch (pre){
+                    case 0: cc = cc; break;
+                    case 1: cc = graph[cc][MOVE_U_NORMAL]; break; 
+                    case 2: cc = graph[cc][MOVE_U_INVERSE]; break;
+                    case 3: cc = graph[cc][MOVE_U_DOUBLE]; break;
+                }
+                cc = cube_to_inverse(cc);
+                for (u64 post = 0; post < 4; post++){
+                    switch (post){
+                        case 0: cc = cc; break;
+                        case 1: cc = graph[cc][MOVE_U_NORMAL]; break; 
+                        case 2: cc = graph[cc][MOVE_U_INVERSE]; break;
+                        case 3: cc = graph[cc][MOVE_U_DOUBLE]; break;
+                    }
+                    solve(cc);
+                }
+            }
+*/
+            cout << solution_value << "\n";
             output_solution();
             solution_value = INFINITY;
             solution_size = 0;

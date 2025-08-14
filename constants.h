@@ -62,6 +62,7 @@
 
 #define UNDEFINED_UF INFINITY
 
+#define PICKUP 100
 #define GOOD_REGRIP 25
 #define BAD_REGRIP 75
 
@@ -79,7 +80,7 @@
 #define PINCH_PINCH
 #define PINCH_INDEX
 */
-#define PINCH_MIDDLE INFINITY // 200 //175
+#define PINCH_MIDDLE INFINITY //i think 200 is best
 /*
 #define PINCH_DOUBLE
 #define PINCH_PUSH
@@ -110,14 +111,14 @@
 */
 
 //#define NONE_NONE_NONE
-#define NONE_NONE_PINCH 125
-#define NONE_NONE_INDEX 125
+#define NONE_NONE_PINCH 125 
+#define NONE_NONE_INDEX 125 
 //#define NONE_NONE_MIDDLE 
-#define NONE_NONE_DOUBLE 175
+#define NONE_NONE_DOUBLE 175 
 #define NONE_NONE_PUSH INFINITY //200 //175
 
 //#define PINCH_NONE_NONE
-#define PINCH_NONE_PINCH 200 //200 //after [remove push change]: 175
+#define PINCH_NONE_PINCH 175 
 #define PINCH_NONE_INDEX 175
 #define PINCH_NONE_MIDDLE 150
 #define PINCH_NONE_DOUBLE 225
@@ -141,7 +142,7 @@
 #define DOUBLE_NONE_PINCH 250
 #define DOUBLE_NONE_INDEX 250
 //#define DOUBLE_NONE_MIDDLE
-#define DOUBLE_NONE_DOUBLE 300
+#define DOUBLE_NONE_DOUBLE 300 
 #define DOUBLE_NONE_PUSH INFINITY //200
 
 //#define PUSH_NONE_NONE

@@ -71,10 +71,7 @@ void rotate_algorithm(u64 input_alg[MAX_MOVES], u64 output_alg[MAX_MOVES], u64 a
 }
 
 void found(u64 moves[MAX_MOVES], u64 moves_size){
-    for (u64 ldb = 0; ldb < ANGLES; ldb++){  
-        /*if (ldb != 0){
-            continue;
-        }*/
+    for (u64 ldb = 0; ldb < ANGLES; ldb++){ 
         u64 rotated_moves[MAX_MOVES];
         u64 rot[2];
         u64 rot_size;
