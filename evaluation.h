@@ -62,10 +62,10 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
     
 
     if (history2 != TRICK_NONE){
-        bool h2l = history2 == TRICK_LEFT_PINCH || history2 == TRICK_LEFT_INDEX || history2 == TRICK_LEFT_MIDDLE || history2 == TRICK_LEFT_DOUBLE || history2 == TRICK_LEFT_PUSH;
-        bool h2r = history2 == TRICK_RIGHT_PINCH || history2 == TRICK_RIGHT_INDEX || history2 == TRICK_RIGHT_MIDDLE || history2 == TRICK_RIGHT_DOUBLE || history2 == TRICK_RIGHT_PUSH;
-        bool nl = next == TRICK_LEFT_PINCH || next == TRICK_LEFT_INDEX || next == TRICK_LEFT_MIDDLE || next == TRICK_LEFT_DOUBLE || next == TRICK_LEFT_PUSH;
-        bool nr = next == TRICK_RIGHT_PINCH || next == TRICK_RIGHT_INDEX || next == TRICK_RIGHT_MIDDLE || next == TRICK_RIGHT_DOUBLE || next == TRICK_RIGHT_PUSH;
+        bool h2l = history2 == TRICK_LEFT_PINCH || history2 == TRICK_LEFT_INDEX || history2 == TRICK_LEFT_MIDDLE || history2 == TRICK_LEFT_DOUBLE ;//|| history2 == TRICK_LEFT_PUSH;
+        bool h2r = history2 == TRICK_RIGHT_PINCH || history2 == TRICK_RIGHT_INDEX || history2 == TRICK_RIGHT_MIDDLE || history2 == TRICK_RIGHT_DOUBLE ;//|| history2 == TRICK_RIGHT_PUSH;
+        bool nl = next == TRICK_LEFT_PINCH || next == TRICK_LEFT_INDEX || next == TRICK_LEFT_MIDDLE || next == TRICK_LEFT_DOUBLE  ;//|| next == TRICK_LEFT_PUSH;
+        bool nr = next == TRICK_RIGHT_PINCH || next == TRICK_RIGHT_INDEX || next == TRICK_RIGHT_MIDDLE || next == TRICK_RIGHT_DOUBLE  ;//|| next == TRICK_RIGHT_PUSH;
         if (history2 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_MIDDLE){
             result = PINCH_MIDDLE;
         }
@@ -76,12 +76,12 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
             if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH + 25; }
             else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX + 25; }
             else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
-            else if (next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH + 25; }  
+            else if (next == TRICK_LEFT_PUSH){ result = INFINITY; } // todo check how to approach this //NONE_NONE_PUSH + 25; }  
 
             else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH + 25; }
             else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX + 25; }
             else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
-            else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH + 25; } 
+            else if (next == TRICK_RIGHT_PUSH){ result = INFINITY; }  // todo check how to approach this // NONE_NONE_PUSH + 25; 
 
             else{
                 result = INFINITY;

@@ -125,6 +125,7 @@ int main(){
     u64 example = get_example();
     
     solve(example);
+    //cout << solution_value << ": ";
     output_solution();
     solution_value = INFINITY;
     solution_size = 0;
@@ -137,8 +138,8 @@ int main(){
         bool valid = get_moves(&c, &line);
         if (valid){
             solve(c);
-/*
-            u64 cc = c;
+
+            /*u64 cc = c;
             for (u64 pre = 0; pre < 4; pre++){
                 cc = cube_to_inverse(cc);
                 switch (pre){
@@ -157,9 +158,9 @@ int main(){
                     }
                     solve(cc);
                 }
-            }
-*/
-            cout << solution_value << "\n";
+            }*/
+
+            //cout << solution_value << ": ";
             output_solution();
             solution_value = INFINITY;
             solution_size = 0;
