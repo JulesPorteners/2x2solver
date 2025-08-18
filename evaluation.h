@@ -59,8 +59,6 @@ void add_edge(u64 move, u64 i, u64 grip, u64 trick1, u64 trick2, u64 cost){
 u64 get_cost(u64 history1, u64 history2, u64 next){
     u64 result;
 
-    
-
     if (history2 != TRICK_NONE){
         bool h2l = history2 == TRICK_LEFT_PINCH || history2 == TRICK_LEFT_INDEX || history2 == TRICK_LEFT_MIDDLE || history2 == TRICK_LEFT_DOUBLE ;//|| history2 == TRICK_LEFT_PUSH;
         bool h2r = history2 == TRICK_RIGHT_PINCH || history2 == TRICK_RIGHT_INDEX || history2 == TRICK_RIGHT_MIDDLE || history2 == TRICK_RIGHT_DOUBLE ;//|| history2 == TRICK_RIGHT_PUSH;
@@ -76,19 +74,17 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
             if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH + 25; }
             else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX + 25; }
             else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
-            else if (next == TRICK_LEFT_PUSH){ result = INFINITY; } // todo check how to approach this //NONE_NONE_PUSH + 25; }  
+            //else if (next == TRICK_LEFT_PUSH){ result = INFINITY; } // todo check how to approach this //NONE_NONE_PUSH + 25; }  
 
             else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH + 25; }
             else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX + 25; }
             else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
-            else if (next == TRICK_RIGHT_PUSH){ result = INFINITY; }  // todo check how to approach this // NONE_NONE_PUSH + 25; 
+            //else if (next == TRICK_RIGHT_PUSH){ result = INFINITY; }  // todo check how to approach this // NONE_NONE_PUSH + 25; 
 
             else{
                 result = INFINITY;
             }
         }
-
-
         else{ 
             result = INFINITY; //UNDEFINED_UF;
         } 
