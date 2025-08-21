@@ -15,6 +15,9 @@ struct hash_table_cell hash_table[HASH_TABLE_SIZE];
 u64 distances[STATES];
 u64 graph[STATES][MOVES];
 
+u64 unique_cubes[UNIQUE_STATES];
+bool discovered[STATES];
+
 u64 id(struct cube* c){
     u64 sum = 0;
     u64 base = 1;
@@ -97,6 +100,23 @@ void tables_generator(){
             if (m % 3 == 2){
                 cube_move(&c, m);
             }
+        }
+    }
+
+    u64 unique_cubes_next = 0;
+    for (u64 s = 0; s < STATES; s++){
+        if (!discovered[s]){
+            for (u64 r = 0; r < ANGLES; r++){
+                struct cube c = cubes[s];
+                cube_rotate(&c, r);
+                cube_recolour(&c); 
+                u64 i = hash_table_get(&c)->index;
+                if (!discovered[i]){
+                    discovered[i] = true;
+                }
+            }
+            unique_cubes[unique_cubes_next] = s;
+            unique_cubes_next++;
         }
     }
 }
