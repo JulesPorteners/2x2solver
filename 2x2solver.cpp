@@ -71,6 +71,9 @@ void output_solution(){
         if (j >= SOLUTIONS && solutions[j].solution_value != solutions[j - 1].solution_value){
             break;
         }
+        if (solutions[j].solution_value == INFINITY){
+            break;
+        }
         output += "(" + std::to_string(solutions[j].solution_value) + ") ";
         for (u64 i = 0; i < solutions[j].rotations_size; i++){
             switch (solutions[j].rotations[i]){
@@ -85,6 +88,7 @@ void output_solution(){
                 case ROTATION_Z_DOUBLE: output += ("z2 "); break;
             }
         }
+        output += ": ";
         for (u64 i = 0; i < solutions[j].solution_size; i++){
             switch (solutions[j].solution[i]){
                 case MOVE_R_NORMAL: output += ("R "); break;
@@ -141,12 +145,8 @@ int main(){
     u64 example = get_example();
     
     solve(example);
-    //cout << solution_value << ": ";
     output_solution();
     solutions.clear();
-    /*solution_value = INFINITY;
-    solution_size = 0;
-    rotations_size = 0;*/
 
     cout << "\n> ";
     string line;
@@ -156,7 +156,7 @@ int main(){
         if (valid){
             solve(c);
 
-            /*u64 cc = c;
+/*            u64 cc = c;
             for (u64 pre = 0; pre < 4; pre++){
                 cc = cube_to_inverse(cc);
                 switch (pre){
@@ -176,13 +176,9 @@ int main(){
                     solve(cc);
                 }
             }*/
-
-            //cout << solution_value << ": ";
+            
             output_solution();
             solutions.clear();
-            /*solution_value = INFINITY;
-            solution_size = 0;
-            rotations_size = 0;*/
 
         }
         else{
