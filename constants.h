@@ -17,6 +17,7 @@
 #define ANGLES 24
 #define INFINITY 374269
 #define UNIQUE_STATES 154608
+#define SOLUTIONS 5
 
 #define MOVE_R_NORMAL 0
 #define MOVE_R_INVERSE 1

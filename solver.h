@@ -6,12 +6,17 @@
 #include "cube.h"
 #include "tables.h"
 #include "evaluation.h"
+#include <vector>
 
-u64 rotations[2];
-u64 rotations_size = 0;
-u64 solution[MAX_MOVES];
-u64 solution_size = 0;
-u64 solution_value = INFINITY;
+struct solution{
+    u64 rotations[2];
+    u64 rotations_size = 0;
+    u64 solution[MAX_MOVES];
+    u64 solution_size = 0;
+    u64 solution_value = INFINITY;
+};
+std::vector<struct solution> solutions;
+
 
 u64 update_move[MOVES][ANGLES] = {
 	{0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6},
@@ -80,16 +85,25 @@ void found(u64 moves[MAX_MOVES], u64 moves_size){
         u64 rot_size;
         rotate_algorithm(moves, rotated_moves, moves_size, rot, &rot_size, ldb);
         u64 e = eval(rotated_moves, moves_size);
-        if (e < solution_value){
-            for (u64 i = 0; i < rot_size; i++){
-                rotations[i] = rot[i];
+
+        struct solution s;
+        s.rotations_size = rot_size;
+        for (u64 i = 0; i < s.rotations_size; i++){
+            s.rotations[i] = rot[i];
+        }
+        s.solution_size = moves_size;
+        for (u64 i = 0; i < s.solution_size; i++){
+            s.solution[i] = rotated_moves[i];
+        }
+        s.solution_value = e;
+        solutions.push_back(s);
+        for (u64 i = solutions.size() - 1; i > 0; i--){
+            if (solutions[i].solution_value < solutions[i - 1].solution_value){
+                std::swap(solutions[i], solutions[i - 1]);
             }
-            rotations_size = rot_size;
-            for (u64 i = 0; i < moves_size; i++){
-                solution[i] = rotated_moves[i];
+            else{
+                break;
             }
-            solution_size = moves_size;
-            solution_value = e;
         }
     }
 }

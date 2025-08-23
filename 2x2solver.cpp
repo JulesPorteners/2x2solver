@@ -62,38 +62,44 @@ bool get_moves(u64* cc, string* line){
 }
 
 void output_solution(){ 
-    if (solution_value == INFINITY){
+    if (solutions[0].solution_value == INFINITY){
         cout << "ERROR: no good solution found\n";
         return;
     }
     string output = "";
-    for (u64 i = 0; i < rotations_size; i++){
-        switch (rotations[i]){
-            case ROTATION_X_NORMAL: output += ("x "); break;
-            case ROTATION_X_INVERSE: output += ("x' "); break;
-            case ROTATION_X_DOUBLE: output += ("x2 "); break;
-            case ROTATION_Y_NORMAL: output += ("y "); break;
-            case ROTATION_Y_INVERSE: output += ("y' "); break;
-            case ROTATION_Y_DOUBLE: output += ("y2 "); break;
-            case ROTATION_Z_NORMAL: output += ("z "); break;
-            case ROTATION_Z_INVERSE: output += ("z' "); break;
-            case ROTATION_Z_DOUBLE: output += ("z2 "); break;
+    for (u64 j = 0; j < solutions.size(); j++){
+        if (j >= SOLUTIONS && solutions[j].solution_value != solutions[j - 1].solution_value){
+            break;
         }
-    }
-    for (u64 i = 0; i < solution_size; i++){
-        switch (solution[i]){
-            case MOVE_R_NORMAL: output += ("R "); break;
-            case MOVE_R_INVERSE: output += ("R' "); break;
-            case MOVE_R_DOUBLE: output += ("R2 "); break;
-            case MOVE_U_NORMAL: output += ("U "); break;
-            case MOVE_U_INVERSE: output += ("U' "); break;
-            case MOVE_U_DOUBLE: output += ("U2 "); break;
-            case MOVE_F_NORMAL: output += ("F "); break;
-            case MOVE_F_INVERSE: output += ("F' "); break;
-            case MOVE_F_DOUBLE: output += ("F2 "); break;
+        output += "(" + std::to_string(solutions[j].solution_value) + ") ";
+        for (u64 i = 0; i < solutions[j].rotations_size; i++){
+            switch (solutions[j].rotations[i]){
+                case ROTATION_X_NORMAL: output += ("x "); break;
+                case ROTATION_X_INVERSE: output += ("x' "); break;
+                case ROTATION_X_DOUBLE: output += ("x2 "); break;
+                case ROTATION_Y_NORMAL: output += ("y "); break;
+                case ROTATION_Y_INVERSE: output += ("y' "); break;
+                case ROTATION_Y_DOUBLE: output += ("y2 "); break;
+                case ROTATION_Z_NORMAL: output += ("z "); break;
+                case ROTATION_Z_INVERSE: output += ("z' "); break;
+                case ROTATION_Z_DOUBLE: output += ("z2 "); break;
+            }
         }
+        for (u64 i = 0; i < solutions[j].solution_size; i++){
+            switch (solutions[j].solution[i]){
+                case MOVE_R_NORMAL: output += ("R "); break;
+                case MOVE_R_INVERSE: output += ("R' "); break;
+                case MOVE_R_DOUBLE: output += ("R2 "); break;
+                case MOVE_U_NORMAL: output += ("U "); break;
+                case MOVE_U_INVERSE: output += ("U' "); break;
+                case MOVE_U_DOUBLE: output += ("U2 "); break;
+                case MOVE_F_NORMAL: output += ("F "); break;
+                case MOVE_F_INVERSE: output += ("F' "); break;
+                case MOVE_F_DOUBLE: output += ("F2 "); break;
+            }
+        }
+        output += ("\n");
     }
-    output += ("\n");
     cout << output;
 
 }
@@ -137,9 +143,10 @@ int main(){
     solve(example);
     //cout << solution_value << ": ";
     output_solution();
-    solution_value = INFINITY;
+    solutions.clear();
+    /*solution_value = INFINITY;
     solution_size = 0;
-    rotations_size = 0;
+    rotations_size = 0;*/
 
     cout << "\n> ";
     string line;
@@ -172,9 +179,10 @@ int main(){
 
             //cout << solution_value << ": ";
             output_solution();
-            solution_value = INFINITY;
+            solutions.clear();
+            /*solution_value = INFINITY;
             solution_size = 0;
-            rotations_size = 0;
+            rotations_size = 0;*/
 
         }
         else{
