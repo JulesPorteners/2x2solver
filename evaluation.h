@@ -59,7 +59,99 @@ void add_edge(u64 move, u64 i, u64 grip, u64 trick1, u64 trick2, u64 cost){
 u64 get_cost(u64 history1, u64 history2, u64 next){
     u64 result;
 
-    if (history2 != TRICK_NONE){
+    if (history2 == TRICK_NONE){
+        if (history1 == TRICK_NONE && next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH; }
+        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX; }
+        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_MIDDLE){ result = NONE_NONE_MIDDLE; }
+        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE; }
+        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH; }
+
+        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_PINCH){ result = PINCH_NONE_PINCH; }
+        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_INDEX){ result = PINCH_NONE_INDEX; }
+        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_MIDDLE){ result = PINCH_NONE_MIDDLE; } 
+        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_DOUBLE){ result = PINCH_NONE_DOUBLE; }
+        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_PUSH){ result = PINCH_NONE_PUSH; }
+
+        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_PINCH){ result = INDEX_NONE_PINCH; }
+        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_INDEX){ result = INDEX_NONE_INDEX; }
+        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_MIDDLE){ result = INDEX_NONE_MIDDLE; } 
+        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_DOUBLE){ result = INDEX_NONE_DOUBLE; }
+        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_PUSH){ result = INDEX_NONE_PUSH; }
+
+        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_PINCH){ result = MIDDLE_NONE_PINCH; }
+        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_INDEX){ result = MIDDLE_NONE_INDEX; }
+        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_MIDDLE){ result = MIDDLE_NONE_MIDDLE; }
+        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_DOUBLE){ result = MIDDLE_NONE_DOUBLE; }
+        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_PUSH){ result = MIDDLE_NONE_PUSH; }
+
+        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_PINCH){ result = DOUBLE_NONE_PINCH; }
+        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_INDEX){ result = DOUBLE_NONE_INDEX; }
+        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_MIDDLE){ result = DOUBLE_NONE_MIDDLE; }
+        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_DOUBLE){ result = DOUBLE_NONE_DOUBLE; }
+        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_PUSH){ result = DOUBLE_NONE_PUSH; }
+
+        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_PINCH){ result = PUSH_NONE_PINCH; }
+        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_INDEX){ result = PUSH_NONE_INDEX; }
+        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_MIDDLE){ result = PUSH_NONE_MIDDLE; }
+        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_DOUBLE){ result = PUSH_NONE_DOUBLE; }
+        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_PUSH){ result = PUSH_NONE_PUSH; }
+
+
+        else if (history1 == TRICK_NONE && next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH; }
+        else if (history1 == TRICK_NONE && next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX; }
+        else if (history1 == TRICK_NONE && next == TRICK_LEFT_MIDDLE){ result = NONE_NONE_MIDDLE; }
+        else if (history1 == TRICK_NONE && next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE; }
+        else if (history1 == TRICK_NONE && next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH; }
+
+        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_PINCH){ result = PINCH_NONE_PINCH; }
+        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_INDEX){ result = PINCH_NONE_INDEX; }
+        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_MIDDLE){ result = PINCH_NONE_MIDDLE; } 
+        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_DOUBLE){ result = PINCH_NONE_DOUBLE; }
+        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_PUSH){ result = PINCH_NONE_PUSH; }
+
+        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_PINCH){ result = INDEX_NONE_PINCH; }
+        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_INDEX){ result = INDEX_NONE_INDEX; }
+        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_MIDDLE){ result = INDEX_NONE_MIDDLE; } 
+        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_DOUBLE){ result = INDEX_NONE_DOUBLE; }
+        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_PUSH){ result = INDEX_NONE_PUSH; }
+
+        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_PINCH){ result = MIDDLE_NONE_PINCH; }
+        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_INDEX){ result = MIDDLE_NONE_INDEX; }
+        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_MIDDLE){ result = MIDDLE_NONE_MIDDLE; }
+        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_DOUBLE){ result = MIDDLE_NONE_DOUBLE; }
+        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_PUSH){ result = MIDDLE_NONE_PUSH; }
+
+        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_PINCH){ result = DOUBLE_NONE_PINCH; }
+        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_INDEX){ result = DOUBLE_NONE_INDEX; }
+        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_MIDDLE){ result = DOUBLE_NONE_MIDDLE; }
+        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_DOUBLE){ result = DOUBLE_NONE_DOUBLE; }
+        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_PUSH){ result = DOUBLE_NONE_PUSH; }
+
+        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_PINCH){ result = PUSH_NONE_PINCH; }
+        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_INDEX){ result = PUSH_NONE_INDEX; }
+        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_MIDDLE){ result = PUSH_NONE_MIDDLE; }
+        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_DOUBLE){ result = PUSH_NONE_DOUBLE; }
+        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_PUSH){ result = PUSH_NONE_PUSH; }
+        
+        /* alternating hands */
+        else if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH; }
+        else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX; }
+        else if (next == TRICK_LEFT_MIDDLE){ result = NONE_NONE_MIDDLE; }
+        else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE; }
+        else if (next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH; }  
+
+        else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH; }
+        else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX; }
+        else if (next == TRICK_RIGHT_MIDDLE){ result = NONE_NONE_MIDDLE; }
+        else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE; }
+        else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH; } 
+
+        else{
+            result = INFINITY;
+        }
+    }
+
+    else if (history1 == TRICK_NONE && history2 != TRICK_NONE){
         bool h2l = history2 == TRICK_LEFT_PINCH || history2 == TRICK_LEFT_INDEX || history2 == TRICK_LEFT_MIDDLE || history2 == TRICK_LEFT_DOUBLE ;//|| history2 == TRICK_LEFT_PUSH;
         bool h2r = history2 == TRICK_RIGHT_PINCH || history2 == TRICK_RIGHT_INDEX || history2 == TRICK_RIGHT_MIDDLE || history2 == TRICK_RIGHT_DOUBLE ;//|| history2 == TRICK_RIGHT_PUSH;
         bool nl = next == TRICK_LEFT_PINCH || next == TRICK_LEFT_INDEX || next == TRICK_LEFT_MIDDLE || next == TRICK_LEFT_DOUBLE  ;//|| next == TRICK_LEFT_PUSH;
@@ -70,7 +162,11 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
         else if (history2 == TRICK_LEFT_PINCH && next == TRICK_LEFT_MIDDLE){
             result = PINCH_MIDDLE;
         }
+        else if (next == TRICK_RIGHT_MIDDLE || next == TRICK_LEFT_MIDDLE){
+            result = INFINITY;
+        }
         else if ((h2l && nr) || (h2r && nl)){
+
             if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH + 25; }
             else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX + 25; }
             else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE + 25; }
@@ -86,78 +182,48 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
             }
         }
         else{ 
-            result = INFINITY; //UNDEFINED_UF;
+            result = UNDEFINED_UF; //UNDEFINED_UF;
         } 
     }
-    
-    else if (history2 == TRICK_NONE){
-        if (history1 == TRICK_NONE && next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH; }
-        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX; }
-        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE; }
-        else if (history1 == TRICK_NONE && next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH; }
-        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_PINCH){ result = PINCH_NONE_PINCH; }
-        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_INDEX){ result = PINCH_NONE_INDEX; }
-        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_MIDDLE){ result = PINCH_NONE_MIDDLE; } 
-        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_DOUBLE){ result = PINCH_NONE_DOUBLE; }
-        else if (history1 == TRICK_RIGHT_PINCH && next == TRICK_RIGHT_PUSH){ result = PINCH_NONE_PUSH; }
-        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_PINCH){ result = INDEX_NONE_PINCH; }
-        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_INDEX){ result = INDEX_NONE_INDEX; }
-        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_MIDDLE){ result = INDEX_NONE_MIDDLE; } 
-        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_DOUBLE){ result = INDEX_NONE_DOUBLE; }
-        else if (history1 == TRICK_RIGHT_INDEX && next == TRICK_RIGHT_PUSH){ result = INDEX_NONE_PUSH; }
-        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_PINCH){ result = MIDDLE_NONE_PINCH; }
-        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_INDEX){ result = MIDDLE_NONE_INDEX; }
-        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_DOUBLE){ result = MIDDLE_NONE_DOUBLE; }
-        else if (history1 == TRICK_RIGHT_MIDDLE && next == TRICK_RIGHT_PUSH){ result = MIDDLE_NONE_PUSH; }
-        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_PINCH){ result = DOUBLE_NONE_PINCH; }
-        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_INDEX){ result = DOUBLE_NONE_INDEX; }
-        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_DOUBLE){ result = DOUBLE_NONE_DOUBLE; }
-        else if (history1 == TRICK_RIGHT_DOUBLE && next == TRICK_RIGHT_PUSH){ result = DOUBLE_NONE_PUSH; }
-        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_PINCH){ result = PUSH_NONE_PINCH; }
-        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_INDEX){ result = PUSH_NONE_INDEX; }
-        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_DOUBLE){ result = PUSH_NONE_DOUBLE; }
-        else if (history1 == TRICK_RIGHT_PUSH && next == TRICK_RIGHT_PUSH){ result = PUSH_NONE_PUSH; }
-
-        else if (history1 == TRICK_NONE && next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH; }
-        else if (history1 == TRICK_NONE && next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX; }
-        else if (history1 == TRICK_NONE && next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE; }
-        else if (history1 == TRICK_NONE && next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH; }
-        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_PINCH){ result = PINCH_NONE_PINCH; }
-        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_INDEX){ result = PINCH_NONE_INDEX; }
-        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_MIDDLE){ result = PINCH_NONE_MIDDLE; } 
-        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_DOUBLE){ result = PINCH_NONE_DOUBLE; }
-        else if (history1 == TRICK_LEFT_PINCH && next == TRICK_LEFT_PUSH){ result = PINCH_NONE_PUSH; }
-        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_PINCH){ result = INDEX_NONE_PINCH; }
-        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_INDEX){ result = INDEX_NONE_INDEX; }
-        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_MIDDLE){ result = INDEX_NONE_MIDDLE; } 
-        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_DOUBLE){ result = INDEX_NONE_DOUBLE; }
-        else if (history1 == TRICK_LEFT_INDEX && next == TRICK_LEFT_PUSH){ result = INDEX_NONE_PUSH; }
-        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_PINCH){ result = MIDDLE_NONE_PINCH; }
-        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_INDEX){ result = MIDDLE_NONE_INDEX; }
-        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_DOUBLE){ result = MIDDLE_NONE_DOUBLE; }
-        else if (history1 == TRICK_LEFT_MIDDLE && next == TRICK_LEFT_PUSH){ result = MIDDLE_NONE_PUSH; }
-        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_PINCH){ result = DOUBLE_NONE_PINCH; }
-        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_INDEX){ result = DOUBLE_NONE_INDEX; }
-        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_DOUBLE){ result = DOUBLE_NONE_DOUBLE; }
-        else if (history1 == TRICK_LEFT_DOUBLE && next == TRICK_LEFT_PUSH){ result = DOUBLE_NONE_PUSH; }
-        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_PINCH){ result = PUSH_NONE_PINCH; }
-        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_INDEX){ result = PUSH_NONE_INDEX; }
-        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_DOUBLE){ result = PUSH_NONE_DOUBLE; }
-        else if (history1 == TRICK_LEFT_PUSH && next == TRICK_LEFT_PUSH){ result = PUSH_NONE_PUSH; }
-
-        else if (next == TRICK_LEFT_PINCH){ result = NONE_NONE_PINCH; }
-        else if (next == TRICK_LEFT_INDEX){ result = NONE_NONE_INDEX; }
-        else if (next == TRICK_LEFT_DOUBLE){ result = NONE_NONE_DOUBLE; }
-        else if (next == TRICK_LEFT_PUSH){ result = NONE_NONE_PUSH; }  
-
-        else if (next == TRICK_RIGHT_PINCH){ result = NONE_NONE_PINCH; }
-        else if (next == TRICK_RIGHT_INDEX){ result = NONE_NONE_INDEX; }
-        else if (next == TRICK_RIGHT_DOUBLE){ result = NONE_NONE_DOUBLE; }
-        else if (next == TRICK_RIGHT_PUSH){ result = NONE_NONE_PUSH; } 
-
+    else{
+        bool h1l = 
+            history1 == TRICK_LEFT_PINCH 
+            || history1 == TRICK_LEFT_INDEX 
+            || history1 == TRICK_LEFT_MIDDLE 
+            || history1 == TRICK_LEFT_DOUBLE ;
+        bool h1r = 
+            history1 == TRICK_RIGHT_PINCH 
+            || history1 == TRICK_RIGHT_INDEX 
+            || history1 == TRICK_RIGHT_MIDDLE 
+            || history1 == TRICK_RIGHT_DOUBLE ;
+        bool h2l = 
+            history2 == TRICK_LEFT_PINCH 
+            || history2 == TRICK_LEFT_INDEX 
+            || history2 == TRICK_LEFT_MIDDLE 
+            || history2 == TRICK_LEFT_DOUBLE ;
+        bool h2r = 
+            history2 == TRICK_RIGHT_PINCH 
+            || history2 == TRICK_RIGHT_INDEX 
+            || history2 == TRICK_RIGHT_MIDDLE 
+            || history2 == TRICK_RIGHT_DOUBLE ;
+        bool nl = 
+            next == TRICK_LEFT_PINCH 
+            || next == TRICK_LEFT_INDEX 
+            || next == TRICK_LEFT_MIDDLE 
+            || next == TRICK_LEFT_DOUBLE ;
+        bool nr = 
+            next == TRICK_RIGHT_PINCH 
+            || next == TRICK_RIGHT_INDEX 
+            || next == TRICK_RIGHT_MIDDLE 
+            || next == TRICK_RIGHT_DOUBLE ;
+        if ((h1r && h2l && nr) || (h1l && h2r && nl)){
+            result = INFINITY;
+            //result = 25 + get_cost(history1, TRICK_NONE, next);
+        }
         else{
             result = INFINITY;
         }
+        
     }
 
     return result;
@@ -292,11 +358,11 @@ void init_layers(){
 }
 
 u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
-    for (u64 i = 0; i + 2 < moves_size; i++){
+    /*for (u64 i = 0; i + 2 < moves_size; i++){
         if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
             return INFINITY;
         }
-    }
+    }*/
 
     u64 distances_even[COORDINATES]; 
     u64 distances_odd[COORDINATES]; 
