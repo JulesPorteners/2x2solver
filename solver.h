@@ -96,7 +96,9 @@ void found(u64 moves[MAX_MOVES], u64 moves_size){
             s.solution[i] = rotated_moves[i];
         }
         s.solution_value = e;
-        solutions.push_back(s);
+        if (solutions.size() < SOLUTIONS || s.solution_value <= solutions[SOLUTIONS - 1].solution_value){
+            solutions.push_back(s);
+        }       
         for (u64 i = solutions.size() - 1; i > 0; i--){
             if (solutions[i].solution_value < solutions[i - 1].solution_value){
                 std::swap(solutions[i], solutions[i - 1]);
