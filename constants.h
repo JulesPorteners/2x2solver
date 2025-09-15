@@ -69,6 +69,8 @@
 #define QUARTER_WRIST 100
 #define HALF_WRIST 150
 
+#define QUARTER_REGRIP 125
+
 /*
 #define NONE_NONE
 #define NONE_PINCH
