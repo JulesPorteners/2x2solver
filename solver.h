@@ -107,6 +107,9 @@ void found(u64 moves[MAX_MOVES], u64 moves_size){
                 break;
             }
         }
+        while (solutions.size() >= SOLUTIONS && solutions[solutions.size() - 1].solution_value > solutions[SOLUTIONS - 1].solution_value){
+            solutions.pop_back();
+        }
     }
 }
 
