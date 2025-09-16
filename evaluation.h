@@ -345,12 +345,12 @@ void init_layers(){
             else if (m == MOVE_F_INVERSE){
                 if (u.grip == GRIP_THUMB_DOWN){ 
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_PINCH, get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
-                    add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
+                    //add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
                     add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_PUSH, get_cost(u.trick1, u.trick2, TRICK_RIGHT_PUSH));
                 }
                 else if (u.grip == GRIP_THUMB_FRONT){  
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_PINCH, get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
-                    add_edge(m, i, GRIP_THUMB_DOWN, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
+                    //add_edge(m, i, GRIP_THUMB_DOWN, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
                 }
                 else if (u.grip == GRIP_THUMB_UP){  
                     ;
