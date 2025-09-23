@@ -372,12 +372,6 @@ void init_layers(){
 }
 
 u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
-    /*for (u64 i = 0; i + 2 < moves_size; i++){
-        if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
-            return INFINITY;
-        }
-    }*/
-
     u64 distances_even[COORDINATES]; 
     u64 distances_odd[COORDINATES]; 
     for (u64 i = 0; i < COORDINATES; i++){
@@ -433,14 +427,19 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
                 }                
             }
             else{
+                bool rejected = true;
                 for (u64 i = 0; i < COORDINATES; i++){
                     if (distances_even[i] != INFINITY){
                         for (u64 j = 0; j < layer_move_size[moves[m]][i]; j++){
                             if (distances_even[i] + layer_move[moves[m]][i][j].cost < distances_odd[layer_move[moves[m]][i][j].to]){
+                                rejected = false;
                                 distances_odd[layer_move[moves[m]][i][j].to] = distances_even[i] + layer_move[moves[m]][i][j].cost;
                             }
                         }
                     }
+                }
+                if (rejected){
+                    return INFINITY;
                 }
             }
         }
@@ -448,17 +447,21 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
             for (u64 i = 0; i < COORDINATES; i++){
                 distances_even[i] = INFINITY;
             }
+            bool rejected = true;
             for (u64 i = 0; i < COORDINATES; i++){
                 if (distances_odd[i] != INFINITY){
                     for (u64 j = 0; j < layer_move_size[moves[m]][i]; j++){
                         if (distances_odd[i] + layer_move[moves[m]][i][j].cost < distances_even[layer_move[moves[m]][i][j].to]){
+                            rejected = false;
                             distances_even[layer_move[moves[m]][i][j].to] = distances_odd[i] + layer_move[moves[m]][i][j].cost;
                         }
                     }
                 }
             }
-        }
-        
+            if (rejected){
+                return INFINITY;
+            }
+        } 
     }
         
     u64 result = INFINITY;
@@ -475,12 +478,6 @@ u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
         }   
     }
 
-    /*
-    for (u64 i = 0; i + 2 < moves_size; i++){
-        if ((moves[i] / 3) != 0 && (moves[i + 1] / 3) != 0 && (moves[i + 2] / 3) != 0){
-            result += 500;
-        }
-    }*/
     return result;
 }
 

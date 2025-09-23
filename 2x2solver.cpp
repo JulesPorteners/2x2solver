@@ -133,9 +133,8 @@ int main(){
     for (u64 i = 0; i < UNIQUE_STATES; i++){
         solve(unique_cubes[i]);
         output_solution();
-        solution_value = INFINITY;
-        solution_size = 0;
-        rotations_size = 0;
+        cout << "\n";
+        solutions.clear();
     }*/
 
     cout << "\nEnter a 2x2 scramble using the following moves:\nR R' R2 U U' U2 F F' F2\n\n";

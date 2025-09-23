@@ -11,13 +11,13 @@
 #define STATES 3674160
 #define HASH_TABLE_SIZE (2 * STATES)
 #define GOD 11
-#define EXTRA_MOVES 3 //3
+#define EXTRA_MOVES 3 //3 
 #define MAX_MOVES (GOD + EXTRA_MOVES)
 #define MOVES 9
 #define ANGLES 24
 #define INFINITY 374269
 #define UNIQUE_STATES 154608
-#define SOLUTIONS 5
+#define SOLUTIONS 5 //5
 
 #define MOVE_R_NORMAL 0
 #define MOVE_R_INVERSE 1
