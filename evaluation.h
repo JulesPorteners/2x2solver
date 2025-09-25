@@ -371,111 +371,126 @@ void init_layers(){
     }
 }
 
-u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
-    u64 distances_even[COORDINATES]; 
-    u64 distances_odd[COORDINATES]; 
-    for (u64 i = 0; i < COORDINATES; i++){
-        distances_even[i] = INFINITY;
+struct distance{
+    u64 distances[COORDINATES];
+    bool visited[COORDINATES];
+    u64 visited_list[COORDINATES];
+    u64 visited_list_size; 
+    distance(){
+        for (u64 i = 0; i < COORDINATES; i++){
+            distances[i] = INFINITY;
+            visited[i] = false;
+            visited_list_size = 0;
+        }
     }
-    distances_even[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = 0;
-    
+    void update(u64 coord, u64 cost){
+        distances[coord] = cost;
+        visited[coord] = true;
+        visited_list[visited_list_size] = coord;
+        visited_list_size++;
+    }
+    void reset(){
+        for (u64 i = 0; i < visited_list_size; i++){
+            u64 ii = visited_list[i];
+            distances[ii] = INFINITY;
+            visited[ii] = false;
+        }
+        visited_list_size = 0;
+    }
+    void first_move(u64 m){ 
+        switch (m){
+            case MOVE_R_NORMAL: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP);
+                break;
+            case MOVE_R_INVERSE: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + BAD_REGRIP + PICKUP);
+                break;
+            case MOVE_R_DOUBLE: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE)), HALF_WRIST + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE)), HALF_WRIST + BAD_REGRIP + PICKUP);
+                break;
+            case MOVE_U_NORMAL: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_INDEX)), NONE_NONE_INDEX + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_RIGHT_PINCH)), NONE_NONE_PINCH + BAD_REGRIP + PICKUP);
+                break;
+            case MOVE_U_INVERSE: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + GOOD_REGRIP + PICKUP);
+                break;
+            case MOVE_U_DOUBLE: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP);
+                break;
+            case MOVE_F_NORMAL: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX)), 25 + NONE_NONE_INDEX + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH)), 25 + NONE_NONE_PINCH + PICKUP);
+                break;
+            case MOVE_F_INVERSE: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH)), 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH)), 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP);
+                break;
+            case MOVE_F_DOUBLE: 
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE)), 25 + NONE_NONE_DOUBLE + BAD_REGRIP + PICKUP);
+                break;
+        } 
+    }
+};
+
+u64 eval(u64 moves[MAX_MOVES], u64 moves_size){
+    struct distance even;
+    struct distance odd;
+    even.update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), 0);
     for (u64 m = 0; m < moves_size; m++){
         if (m % 2 == 0){
-            for (u64 i = 0; i < COORDINATES; i++){
-                distances_odd[i] = INFINITY;
-            }
+            odd.reset();
             if (m == 0){
-                switch (moves[0]){
-                    case MOVE_R_NORMAL: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + BAD_REGRIP + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + PICKUP;
-                        break;
-                    case MOVE_R_INVERSE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE))] = QUARTER_WRIST + BAD_REGRIP + PICKUP;
-                        break;
-                    case MOVE_R_DOUBLE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE))] = HALF_WRIST + BAD_REGRIP + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE))] = HALF_WRIST + BAD_REGRIP + PICKUP;
-                        break;
-                    case MOVE_U_NORMAL: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_INDEX))] = NONE_NONE_INDEX + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_RIGHT_PINCH))] = NONE_NONE_PINCH + BAD_REGRIP + PICKUP;
-                        break;
-                    case MOVE_U_INVERSE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + GOOD_REGRIP + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_INDEX))] = NONE_NONE_INDEX + GOOD_REGRIP + PICKUP;
-                        break;
-                    case MOVE_U_DOUBLE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_DOUBLE))] = NONE_NONE_DOUBLE + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE))] = NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP;
-                        break;
-                    case MOVE_F_NORMAL: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX))] = 25 + NONE_NONE_INDEX + BAD_REGRIP + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH))] = 25 + NONE_NONE_PINCH + PICKUP;
-                        break;
-                    case MOVE_F_INVERSE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH))] = 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP;
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH))] = 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP;
-                        break;
-                    case MOVE_F_DOUBLE: 
-                        distances_odd[coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE))] = 25 + NONE_NONE_DOUBLE + BAD_REGRIP + PICKUP;
-                        break;
-                }                
+                odd.first_move(moves[0]);         
             }
             else{
-                bool rejected = true;
-                for (u64 i = 0; i < COORDINATES; i++){
-                    if (distances_even[i] != INFINITY){
-                        for (u64 j = 0; j < layer_move_size[moves[m]][i]; j++){
-                            if (distances_even[i] + layer_move[moves[m]][i][j].cost < distances_odd[layer_move[moves[m]][i][j].to]){
-                                rejected = false;
-                                distances_odd[layer_move[moves[m]][i][j].to] = distances_even[i] + layer_move[moves[m]][i][j].cost;
-                            }
+                for (u64 i = 0; i < even.visited_list_size; i++){
+                    u64 ii = even.visited_list[i];
+                    for (u64 j = 0; j < layer_move_size[moves[m]][ii]; j++){
+                        if (even.distances[ii] + layer_move[moves[m]][ii][j].cost < odd.distances[layer_move[moves[m]][ii][j].to]){
+                            odd.update(layer_move[moves[m]][ii][j].to, even.distances[ii] + layer_move[moves[m]][ii][j].cost);
                         }
                     }
-                }
-                if (rejected){
-                    return INFINITY;
                 }
             }
         }
         else{
-            for (u64 i = 0; i < COORDINATES; i++){
-                distances_even[i] = INFINITY;
-            }
-            bool rejected = true;
-            for (u64 i = 0; i < COORDINATES; i++){
-                if (distances_odd[i] != INFINITY){
-                    for (u64 j = 0; j < layer_move_size[moves[m]][i]; j++){
-                        if (distances_odd[i] + layer_move[moves[m]][i][j].cost < distances_even[layer_move[moves[m]][i][j].to]){
-                            rejected = false;
-                            distances_even[layer_move[moves[m]][i][j].to] = distances_odd[i] + layer_move[moves[m]][i][j].cost;
-                        }
+            even.reset();
+            for (u64 i = 0; i < odd.visited_list_size; i++){
+                u64 ii = odd.visited_list[i];
+                for (u64 j = 0; j < layer_move_size[moves[m]][ii]; j++){
+                    if (odd.distances[ii] + layer_move[moves[m]][ii][j].cost < even.distances[layer_move[moves[m]][ii][j].to]){
+                        even.update(layer_move[moves[m]][ii][j].to, odd.distances[ii] + layer_move[moves[m]][ii][j].cost);
                     }
                 }
-            }
-            if (rejected){
-                return INFINITY;
             }
         } 
     }
         
     u64 result = INFINITY;
-    for (u64 i = 0; i < COORDINATES; i++){
-        if (moves_size % 2 == 0){
-            if (distances_even[i] < result){
-                result = distances_even[i];
+    if (moves_size % 2 == 0){
+        for (u64 i = 0; i < even.visited_list_size; i++){
+            u64 ii = even.visited_list[i];
+            if (even.distances[ii] < result){
+                result = even.distances[ii];
             }
         }
-        else{
-            if (distances_odd[i] < result){
-                result = distances_odd[i];
+    }
+    else{
+        for (u64 i = 0; i < odd.visited_list_size; i++){
+            u64 ii = odd.visited_list[i];
+            if (odd.distances[ii] < result){
+                result = odd.distances[ii];
             }
-        }   
+        }
     }
 
     return result;

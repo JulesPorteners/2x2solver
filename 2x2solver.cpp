@@ -130,12 +130,18 @@ int main(){
     init_layers();
 
     /*
-    for (u64 i = 0; i < UNIQUE_STATES; i++){
+    u64 s = 0;
+    for (u64 i = 154000; i < UNIQUE_STATES; i++){
+        if (i % 10 == 0){
+            cout << "i = " << i << "\n";
+        }
         solve(unique_cubes[i]);
-        output_solution();
-        cout << "\n";
+        s += solutions[0].solution_value;
+        //output_solution();
+        //cout << "\n";
         solutions.clear();
-    }*/
+    }
+    cout << "s = " << s << "\n";*/
 
     cout << "\nEnter a 2x2 scramble using the following moves:\nR R' R2 U U' U2 F F' F2\n\n";
 
