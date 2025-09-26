@@ -132,7 +132,7 @@ int main(){
     /*
     u64 s = 0;
     for (u64 i = 154000; i < UNIQUE_STATES; i++){
-        if (i % 10 == 0){
+        if (i % 1000 == 0){
             cout << "i = " << i << "\n";
         }
         solve(unique_cubes[i]);
@@ -193,3 +193,5 @@ int main(){
     }
     return 0;
 }
+
+//R2 U2 R U2 R F' R U2 F2 U F'

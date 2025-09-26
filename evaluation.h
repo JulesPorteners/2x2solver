@@ -216,9 +216,11 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
             || next == TRICK_RIGHT_INDEX 
             || next == TRICK_RIGHT_MIDDLE 
             || next == TRICK_RIGHT_DOUBLE ;
-        if ((h1r && h2l && nr) || (h1l && h2r && nl)){
-            result = INFINITY;
-            //result = 25 + get_cost(history1, TRICK_NONE, next);
+        if ((h1r && h2l && nr && next != TRICK_RIGHT_MIDDLE) || (h1l && h2r && nl && next != TRICK_LEFT_MIDDLE)){
+            result = 25 + get_cost(history1, TRICK_NONE, next);
+        }
+        else if ((h1r && h2r && nl) || (h1l && h2l && nr)){
+            result = 25 + get_cost(TRICK_NONE, TRICK_NONE, next);
         }
         else{
             result = INFINITY;
@@ -345,12 +347,12 @@ void init_layers(){
             else if (m == MOVE_F_INVERSE){
                 if (u.grip == GRIP_THUMB_DOWN){ 
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_PINCH, get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
-                    //add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
+                    /**/ add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
                     add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_PUSH, get_cost(u.trick1, u.trick2, TRICK_RIGHT_PUSH));
                 }
                 else if (u.grip == GRIP_THUMB_FRONT){  
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_PINCH, get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
-                    //add_edge(m, i, GRIP_THUMB_DOWN, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
+                    /**/ add_edge(m, i, GRIP_THUMB_DOWN, u.trick2, TRICK_LEFT_PINCH, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_PINCH));
                 }
                 else if (u.grip == GRIP_THUMB_UP){  
                     ;
@@ -369,6 +371,7 @@ void init_layers(){
             } 
         }
     }
+    //todo filter edges with INFINITY cost
 }
 
 struct distance{
@@ -427,15 +430,15 @@ struct distance{
                 this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP);
                 break;
             case MOVE_F_NORMAL: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX)), 25 + NONE_NONE_INDEX + BAD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH)), 25 + NONE_NONE_PINCH + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX)), /*25 +*/ NONE_NONE_INDEX + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH)), /*25 +*/ NONE_NONE_PINCH + PICKUP);
                 break;
             case MOVE_F_INVERSE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH)), 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH)), 25 + NONE_NONE_PINCH + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH)), /*25 +*/ NONE_NONE_PINCH + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH)), /*25 +*/ NONE_NONE_PINCH + PICKUP);
                 break;
             case MOVE_F_DOUBLE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE)), 25 + NONE_NONE_DOUBLE + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE)), /*25 +*/ NONE_NONE_DOUBLE + BAD_REGRIP + PICKUP);
                 break;
         } 
     }
