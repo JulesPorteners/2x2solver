@@ -131,7 +131,7 @@ int main(){
 
     /*
     u64 s = 0;
-    for (u64 i = 154000; i < UNIQUE_STATES; i++){
+    for (u64 i = 0; i < UNIQUE_STATES; i++){
         if (i % 1000 == 0){
             cout << "i = " << i << "\n";
         }

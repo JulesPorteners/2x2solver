@@ -276,7 +276,7 @@ void init_layers(){
                 else if (u.grip == GRIP_THUMB_FRONT){ 
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_PUSH, get_cost(u.trick1, u.trick2, TRICK_LEFT_PUSH));
                     add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_INDEX, get_cost(u.trick1, u.trick2, TRICK_RIGHT_INDEX));
-                    if (u.trick1 == TRICK_RIGHT_INDEX || u.trick2 == TRICK_RIGHT_PINCH){
+                    if (u.trick1 == TRICK_RIGHT_INDEX || u.trick1 == TRICK_RIGHT_PINCH || u.trick2 == TRICK_RIGHT_PINCH){
                         add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_MIDDLE, get_cost(u.trick1, u.trick2, TRICK_RIGHT_MIDDLE));
                     }
                 }
@@ -289,7 +289,7 @@ void init_layers(){
                 if (u.grip == GRIP_THUMB_DOWN){ 
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_INDEX, get_cost(u.trick1, u.trick2, TRICK_LEFT_INDEX));
                     add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_INDEX, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_INDEX));
-                    if (u.trick1 == TRICK_LEFT_INDEX || u.trick2 == TRICK_LEFT_PINCH){
+                    if (u.trick1 == TRICK_LEFT_INDEX || u.trick1 == TRICK_LEFT_PINCH || u.trick2 == TRICK_LEFT_PINCH){ 
                         add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_MIDDLE, get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
                         add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_MIDDLE, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
                     }
@@ -299,7 +299,7 @@ void init_layers(){
                     add_edge(m, i, GRIP_THUMB_DOWN, u.trick2, TRICK_LEFT_INDEX, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_INDEX));
                     add_edge(m, i, GRIP_THUMB_UP, u.trick2, TRICK_LEFT_INDEX, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_INDEX));
                     add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_PUSH, get_cost(u.trick1, u.trick2, TRICK_RIGHT_PUSH));
-                    if (u.trick1 == TRICK_LEFT_INDEX || u.trick2 == TRICK_LEFT_PINCH){
+                    if (u.trick1 == TRICK_LEFT_INDEX || u.trick1 == TRICK_LEFT_PINCH || u.trick2 == TRICK_LEFT_PINCH){
                         add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_MIDDLE, get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
                         add_edge(m, i, GRIP_THUMB_DOWN, u.trick2, TRICK_LEFT_MIDDLE, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
                         add_edge(m, i, GRIP_THUMB_UP, u.trick2, TRICK_LEFT_MIDDLE, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
@@ -308,7 +308,7 @@ void init_layers(){
                 else if (u.grip == GRIP_THUMB_UP){  
                     add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_INDEX, get_cost(u.trick1, u.trick2, TRICK_LEFT_INDEX));
                     add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_INDEX, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_INDEX));
-                    if (u.trick1 == TRICK_LEFT_INDEX){
+                    if (u.trick1 == TRICK_LEFT_INDEX || u.trick1 == TRICK_LEFT_PINCH){ 
                         add_edge(m, i, u.grip, u.trick2, TRICK_LEFT_MIDDLE, get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
                         add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_LEFT_MIDDLE, QUARTER_REGRIP + get_cost(u.trick1, u.trick2, TRICK_LEFT_MIDDLE));
                     }
@@ -333,7 +333,7 @@ void init_layers(){
             else if (m == MOVE_F_NORMAL){
                 if (u.grip == GRIP_THUMB_DOWN){  
                     add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_INDEX, get_cost(u.trick1, u.trick2, TRICK_RIGHT_INDEX));
-                    if (u.trick1 == TRICK_RIGHT_INDEX){
+                    if (u.trick1 == TRICK_RIGHT_INDEX || u.trick1 == TRICK_RIGHT_PINCH){
                         add_edge(m, i, u.grip, u.trick2, TRICK_RIGHT_MIDDLE, get_cost(u.trick1, u.trick2, TRICK_RIGHT_MIDDLE));
                     }
                 }
