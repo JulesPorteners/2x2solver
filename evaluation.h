@@ -222,6 +222,9 @@ u64 get_cost(u64 history1, u64 history2, u64 next){
         else if ((h1r && h2r && nl) || (h1l && h2l && nr)){
             result = 25 + get_cost(TRICK_NONE, TRICK_NONE, next);
         }
+        else if ((h1r && h2l && nl) || (h1l && h2r && nr)){
+            result = 25 + get_cost(TRICK_NONE, history2, next);
+        }
         else{
             result = INFINITY;
         }
