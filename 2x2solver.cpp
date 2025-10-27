@@ -11,54 +11,87 @@
 
 using namespace std;
 
-bool get_moves(u64* cc, string* line){
+u64 get_moves(u64* cc, u64 moves[MAX_MOVES], u64* moves_size, string* line){
     stringstream s(*line); 
     string move;
     u64 c = 0;
-    bool valid = true;
+    *moves_size = 0;
+    u64 result = 1;
     while (s >> move){
-        if (move == "R"){
+        if (move == "*"){
+            result = 2;
+        }
+        else if (move == "R"){
             c = graph[c][MOVE_R_NORMAL];
+            moves[*moves_size] = MOVE_R_NORMAL;
+            (*moves_size)++;
         }
         else if (move == "R'"){
             c = graph[c][MOVE_R_INVERSE];
+            moves[*moves_size] = MOVE_R_INVERSE;
+            (*moves_size)++;
         }
         else if (move == "R2"){
             c = graph[c][MOVE_R_DOUBLE];
+            moves[*moves_size] = MOVE_R_DOUBLE;
+            (*moves_size)++;
         }
         else if (move == "R2'"){
             c = graph[c][MOVE_R_DOUBLE];
+            moves[*moves_size] = MOVE_R_DOUBLE;
+            (*moves_size)++;
         }
         else if (move == "U"){
             c = graph[c][MOVE_U_NORMAL];
+            moves[*moves_size] = MOVE_U_NORMAL;
+            (*moves_size)++;
         }
         else if (move == "U'"){
             c = graph[c][MOVE_U_INVERSE];
+            moves[*moves_size] = MOVE_U_INVERSE;
+            (*moves_size)++;
         }
         else if (move == "U2"){
             c = graph[c][MOVE_U_DOUBLE];
+            moves[*moves_size] = MOVE_U_DOUBLE;
+            (*moves_size)++;
         }
         else if (move == "U2'"){
             c = graph[c][MOVE_U_DOUBLE];
+            moves[*moves_size] = MOVE_U_DOUBLE;
+            (*moves_size)++;
         }
         else if (move == "F"){
             c = graph[c][MOVE_F_NORMAL];
+            moves[*moves_size] = MOVE_F_NORMAL;
+            (*moves_size)++;
         }
         else if (move == "F'"){
             c = graph[c][MOVE_F_INVERSE];
+            moves[*moves_size] = MOVE_F_INVERSE;
+            (*moves_size)++;
         }
         else if (move == "F2"){
             c = graph[c][MOVE_F_DOUBLE];
+            moves[*moves_size] = MOVE_F_DOUBLE;
+            (*moves_size)++;
         }
         else if (move == "F2'"){
             c = graph[c][MOVE_F_DOUBLE];
+            moves[*moves_size] = MOVE_F_DOUBLE;
+            (*moves_size)++;
         }
         else{
-            valid = false;
+            result = 0;
+        }
+        if (*moves_size > MAX_MOVES){
+            result = 0;
+            break;
         }
     }
+    while (s >> move){}
     *cc = c;
-    return valid;
+    return result;
 }
 
 void output_solution(){ 
@@ -153,12 +186,18 @@ int main(){
     output_solution();
     solutions.clear();
 
+    u64 m[MAX_MOVES] = {MOVE_R_NORMAL, MOVE_U_NORMAL, MOVE_R_INVERSE, MOVE_U_INVERSE};
+    u64 ms = 4;
+    cout << "\n> * R U R' U'\nscore = " << eval(m, ms) << "\n";
+
     cout << "\n> ";
     string line;
     while (getline(cin, line)){ 
         u64 c;
-        bool valid = get_moves(&c, &line);
-        if (valid){
+        u64 moves[MAX_MOVES];
+        u64 moves_size;
+        u64 valid = get_moves(&c, moves, &moves_size, &line);
+        if (valid == 1){
             solve(c);
 
             /*for (u64 pre = 0; pre < 4; pre++){
@@ -184,10 +223,13 @@ int main(){
             
             output_solution();
             solutions.clear();
-
+        }
+        else if (valid == 2){
+            u64 e = eval(moves, moves_size);
+            cout << "score = " << e << "\n";
         }
         else{
-            cout << "invalid move\n";
+            cout << "invalid move or too many moves\n";
         }
         cout << "\n> ";
     }
