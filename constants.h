@@ -11,7 +11,7 @@
 #define STATES 3674160
 #define HASH_TABLE_SIZE (2 * STATES)
 #define GOD 11
-#define EXTRA_MOVES 3 //3 
+#define EXTRA_MOVES 4 //3 
 #define MAX_MOVES (GOD + EXTRA_MOVES)
 #define MOVES 9
 #define ANGLES 24

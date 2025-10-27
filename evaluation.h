@@ -238,7 +238,6 @@ void init_layers(){
     for (u64 m = 0; m < MOVES; m++){
         for (u64 i = 0; i < COORDINATES; i++){
             struct coordinate u = number_to_coordinate(i);
-            u64 cost;
             if (m == MOVE_R_NORMAL){
                 if (u.grip == GRIP_THUMB_DOWN){ 
                     add_edge(m, i, GRIP_THUMB_FRONT, u.trick2, TRICK_NONE, QUARTER_WRIST); 
