@@ -11,86 +11,50 @@
 
 using namespace std;
 
-u64 get_moves(u64* cc, u64 moves[MAX_MOVES], u64* moves_size, string* line){
+u64 parse_input(u64* c, u64 moves[MAX_MOVES], u64* moves_size, string* line){
     stringstream s(*line); 
-    string move;
-    u64 c = 0;
+    string token;
+    *c = 0;
     *moves_size = 0;
-    u64 result = 1;
-    while (s >> move){
-        if (move == "*"){
+    u64 result;
+    if (s >> token){
+        if (token == "*"){
             result = 2;
-        }
-        else if (move == "R"){
-            c = graph[c][MOVE_R_NORMAL];
-            moves[*moves_size] = MOVE_R_NORMAL;
-            (*moves_size)++;
-        }
-        else if (move == "R'"){
-            c = graph[c][MOVE_R_INVERSE];
-            moves[*moves_size] = MOVE_R_INVERSE;
-            (*moves_size)++;
-        }
-        else if (move == "R2"){
-            c = graph[c][MOVE_R_DOUBLE];
-            moves[*moves_size] = MOVE_R_DOUBLE;
-            (*moves_size)++;
-        }
-        else if (move == "R2'"){
-            c = graph[c][MOVE_R_DOUBLE];
-            moves[*moves_size] = MOVE_R_DOUBLE;
-            (*moves_size)++;
-        }
-        else if (move == "U"){
-            c = graph[c][MOVE_U_NORMAL];
-            moves[*moves_size] = MOVE_U_NORMAL;
-            (*moves_size)++;
-        }
-        else if (move == "U'"){
-            c = graph[c][MOVE_U_INVERSE];
-            moves[*moves_size] = MOVE_U_INVERSE;
-            (*moves_size)++;
-        }
-        else if (move == "U2"){
-            c = graph[c][MOVE_U_DOUBLE];
-            moves[*moves_size] = MOVE_U_DOUBLE;
-            (*moves_size)++;
-        }
-        else if (move == "U2'"){
-            c = graph[c][MOVE_U_DOUBLE];
-            moves[*moves_size] = MOVE_U_DOUBLE;
-            (*moves_size)++;
-        }
-        else if (move == "F"){
-            c = graph[c][MOVE_F_NORMAL];
-            moves[*moves_size] = MOVE_F_NORMAL;
-            (*moves_size)++;
-        }
-        else if (move == "F'"){
-            c = graph[c][MOVE_F_INVERSE];
-            moves[*moves_size] = MOVE_F_INVERSE;
-            (*moves_size)++;
-        }
-        else if (move == "F2"){
-            c = graph[c][MOVE_F_DOUBLE];
-            moves[*moves_size] = MOVE_F_DOUBLE;
-            (*moves_size)++;
-        }
-        else if (move == "F2'"){
-            c = graph[c][MOVE_F_DOUBLE];
-            moves[*moves_size] = MOVE_F_DOUBLE;
-            (*moves_size)++;
+            while (s >> token && *moves_size < MAX_MOVES){
+                if (token == "R")                        { moves[*moves_size] = MOVE_R_NORMAL; (*moves_size)++; }
+                else if (token == "R'")                  { moves[*moves_size] = MOVE_R_INVERSE; (*moves_size)++; }
+                else if (token == "R2" || token == "R2'"){ moves[*moves_size] = MOVE_R_DOUBLE; (*moves_size)++; }
+                else if (token == "U")                   { moves[*moves_size] = MOVE_U_NORMAL; (*moves_size)++; }
+                else if (token == "U'")                  { moves[*moves_size] = MOVE_U_INVERSE; (*moves_size)++; }
+                else if (token == "U2" || token == "U2'"){ moves[*moves_size] = MOVE_U_DOUBLE; (*moves_size)++; }
+                else if (token == "F")                   { moves[*moves_size] = MOVE_F_NORMAL; (*moves_size)++; }
+                else if (token == "F'")                  { moves[*moves_size] = MOVE_F_INVERSE; (*moves_size)++; }
+                else if (token == "F2" || token == "F2'"){ moves[*moves_size] = MOVE_F_DOUBLE; (*moves_size)++; }
+                else                                     { result = 0; break; }
+            }
         }
         else{
-            result = 0;
-        }
-        if (*moves_size > MAX_MOVES){
-            result = 0;
-            break;
+            result = 1;
+            do {
+                if (token == "R")                        { *c = graph[*c][MOVE_R_NORMAL]; }
+                else if (token == "R'")                  { *c = graph[*c][MOVE_R_INVERSE]; }
+                else if (token == "R2" || token == "R2'"){ *c = graph[*c][MOVE_R_DOUBLE]; }
+                else if (token == "U")                   { *c = graph[*c][MOVE_U_NORMAL]; }
+                else if (token == "U'")                  { *c = graph[*c][MOVE_U_INVERSE]; }
+                else if (token == "U2" || token == "U2'"){ *c = graph[*c][MOVE_U_DOUBLE]; }
+                else if (token == "F")                   { *c = graph[*c][MOVE_F_NORMAL]; }
+                else if (token == "F'")                  { *c = graph[*c][MOVE_F_INVERSE]; }
+                else if (token == "F2" || token == "F2'"){ *c = graph[*c][MOVE_F_DOUBLE]; }
+                else                                     { result = 0; break; }
+            } while (s >> token);
         }
     }
-    while (s >> move){}
-    *cc = c;
+    else{
+        result = 1;
+    }
+    while (s >> token){
+        result = 0;
+    }
     return result;
 }
 
@@ -196,7 +160,7 @@ int main(){
         u64 c;
         u64 moves[MAX_MOVES];
         u64 moves_size;
-        u64 valid = get_moves(&c, moves, &moves_size, &line);
+        u64 valid = parse_input(&c, moves, &moves_size, &line);
         if (valid == 1){
             solve(c);
 
@@ -235,5 +199,3 @@ int main(){
     }
     return 0;
 }
-
-//R2 U2 R U2 R F' R U2 F2 U F'
