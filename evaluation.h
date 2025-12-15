@@ -405,42 +405,42 @@ struct distance{
     void first_move(u64 m){ 
         switch (m){
             case MOVE_R_NORMAL: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + BAD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP_THUMB_DOWN_SEQUENTIAL);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP_THUMB_FRONT);
                 break;
             case MOVE_R_INVERSE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP_THUMB_FRONT);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_NONE)), QUARTER_WRIST + PICKUP_THUMB_UP_SEQUENTIAL);
                 break;
             case MOVE_R_DOUBLE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE)), HALF_WRIST + BAD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE)), HALF_WRIST + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_NONE)), HALF_WRIST + PICKUP_THUMB_UP_SEQUENTIAL);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_NONE)), HALF_WRIST + PICKUP_THUMB_DOWN_SEQUENTIAL);
                 break;
             case MOVE_U_NORMAL: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_INDEX)), NONE_NONE_INDEX + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_RIGHT_PINCH)), NONE_NONE_PINCH + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_INDEX)), NONE_NONE_INDEX + PICKUP_THUMB_FRONT);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_RIGHT_PINCH)), NONE_NONE_PINCH + PICKUP_THUMB_UP_SEQUENTIAL);
                 break;
             case MOVE_U_INVERSE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + GOOD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + PICKUP_THUMB_DOWN_PARALLEL);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + PICKUP_THUMB_FRONT);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_INDEX)), NONE_NONE_INDEX + PICKUP_THUMB_UP_PARALLEL);
                 break;
             case MOVE_U_DOUBLE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + GOOD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP_THUMB_DOWN_PARALLEL);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP_THUMB_FRONT);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP_THUMB_FRONT);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_UP, TRICK_NONE, TRICK_LEFT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP_THUMB_UP_PARALLEL);
                 break;
             case MOVE_F_NORMAL: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX)), /*25 +*/ NONE_NONE_INDEX + BAD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH)), /*25 +*/ NONE_NONE_PINCH + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_INDEX)), NONE_NONE_INDEX + PICKUP_THUMB_DOWN_SEQUENTIAL);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_RIGHT_PINCH)), NONE_NONE_PINCH + PICKUP_THUMB_FRONT_PINCH);
                 break;
             case MOVE_F_INVERSE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH)), /*25 +*/ NONE_NONE_PINCH + GOOD_REGRIP + PICKUP);
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH)), /*25 +*/ NONE_NONE_PINCH + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_LEFT_PINCH)), NONE_NONE_PINCH + PICKUP_THUMB_DOWN_PARALLEL);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_FRONT, TRICK_NONE, TRICK_LEFT_PINCH)), NONE_NONE_PINCH + PICKUP_THUMB_FRONT_PINCH);
                 break;
             case MOVE_F_DOUBLE: 
-                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE)), /*25 +*/ NONE_NONE_DOUBLE + BAD_REGRIP + PICKUP);
+                this->update(coordinate_to_number(coordinate(GRIP_THUMB_DOWN, TRICK_NONE, TRICK_RIGHT_DOUBLE)), NONE_NONE_DOUBLE + PICKUP_THUMB_DOWN_SEQUENTIAL);
                 break;
         } 
     }
